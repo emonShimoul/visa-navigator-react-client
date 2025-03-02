@@ -7,6 +7,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import AddVisa from "./pages/AddVisa";
 import AllVisa from "./pages/AllVisa";
+import MyAddedVisas from "./pages/MyAddedVisas";
+import MyVisaApplication from "./pages/MyVisaApplication";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +24,22 @@ const router = createBrowserRouter([
       {
         path: "add-visa",
         element: <AddVisa></AddVisa>,
+      },
+      {
+        path: "my-added-visas",
+        element: <MyAddedVisas></MyAddedVisas>,
+      },
+      {
+        path: "my-visa-applications",
+        element: <MyVisaApplication></MyVisaApplication>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
       },
     ],
   },
