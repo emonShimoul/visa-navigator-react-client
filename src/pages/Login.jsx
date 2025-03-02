@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const handleGoogleLogin = () => {
+    console.log("Implemented google login");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
@@ -42,9 +46,6 @@ const Login = () => {
           </div>
 
           {/* Login Button */}
-          {/* <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-            Sign In
-          </button> */}
           <input
             type="submit"
             value="Sign In"
@@ -59,6 +60,15 @@ const Login = () => {
             Sign up
           </Link>
         </p>
+
+        <div className="flex justify-center">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-1/2 bg-amber-500 text-black py-2 rounded-lg hover:bg-amber-600 transition cursor-pointer"
+          >
+            Google Login
+          </button>
+        </div>
       </div>
     </div>
   );
