@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
+  const { myObj } = useContext(AuthContext);
+
+  console.log(myObj);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-md px-8 py-4 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md my-4">

@@ -11,6 +11,7 @@ import MyAddedVisas from "./pages/MyAddedVisas";
 import MyVisaApplication from "./pages/MyVisaApplication";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AuthProvider from "./provider/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
