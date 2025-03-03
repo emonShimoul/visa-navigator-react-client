@@ -3,10 +3,30 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-  const { googleLogin, user, setUser } = useContext(AuthContext);
+  const { googleLogin, userLogin, user, setUser } = useContext(AuthContext);
   const [error, setError] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // get form data
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    userLogin(email, password)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        setError({ ...error, login: err.message });
+      });
+  };
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -31,7 +51,7 @@ const Login = () => {
         </h2>
 
         {/* Login Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700 dark:text-gray-300">
               Email
@@ -39,6 +59,7 @@ const Login = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              name="email"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -50,8 +71,12 @@ const Login = () => {
             <input
               type="password"
               placeholder="Enter your password"
+              name="password"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            {error.login && (
+              <p className="text-red-600 font-bold my-2">{error.login}</p>
+            )}
           </div>
 
           {/* Remember Me & Forgot Password */}
