@@ -3,9 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-  const { myObj } = useContext(AuthContext);
-
-  console.log(myObj);
+  const { createNewUser, updatedUserProfile, setUser } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
   const [error, setError] = useState({});
@@ -15,14 +14,14 @@ const Register = () => {
 
     // get form data
     const form = new FormData(e.target);
-    console.log(form);
+    // console.log(form);
 
     const name = form.get("name");
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
 
-    console.log(name, email, photo, password);
+    // console.log(name, email, photo, password);
 
     const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
     if (!regex.test(password)) {
@@ -33,6 +32,24 @@ const Register = () => {
       });
       return;
     }
+
+    createNewUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+        updatedUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            navigate("/");
+          })
+          .cathc((err) => {
+            setError({ ...error, register: err.message });
+          });
+      })
+      .catch((err) => {
+        setError({ ...error, register: err.message });
+      });
   };
 
   return (
