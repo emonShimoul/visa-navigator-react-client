@@ -1,9 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const { googleLogin, user, setUser } = useContext(AuthContext);
+  const [error, setError] = useState({});
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleGoogleLogin = () => {
-    console.log("Implemented google login");
+    googleLogin()
+      .then((result) => {
+        setUser(result.user);
+        console.log(user);
+
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        setError(err.message);
+        console.log(error);
+      });
   };
 
   return (
