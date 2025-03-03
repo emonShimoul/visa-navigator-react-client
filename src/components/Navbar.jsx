@@ -1,8 +1,77 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
+  const navlinks = (
+    <>
+      <li>
+        <Link to="/" className="hover:text-gray-300">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/all-visas" className="hover:text-gray-300">
+          All Visas
+        </Link>
+      </li>
+      <li>
+        <Link to="/add-visa" className="hover:text-gray-300">
+          Add Visa
+        </Link>
+      </li>
+      <li>
+        <Link to="/my-added-visas" className="hover:text-gray-300">
+          My Added Visas
+        </Link>
+      </li>
+      <li>
+        <Link to="/my-visa-applications" className="hover:text-gray-300">
+          My Visa Applications
+        </Link>
+      </li>
+      {user && user?.email ? (
+        // Show Profile Picture & Logout Button when user is logged in
+        <li className="flex  items-center justify-center space-x-2">
+          <img
+            src={user?.photoURL}
+            alt="User"
+            className="w-10 h-10 rounded-full cursor-pointer"
+            title={user?.displayName}
+          />
+          <button
+            onClick={logOut}
+            className="btn btn-sm btn-warning text-black font-semibold text-base"
+          >
+            Logout
+          </button>
+        </li>
+      ) : (
+        <>
+          <li>
+            <Link
+              to="/login"
+              className="hover:text-gray-300 font-bold underline"
+            >
+              Login
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/register"
+              className="hover:text-gray-300 font-bold underline"
+            >
+              Register
+            </Link>
+          </li>
+        </>
+      )}
+    </>
+  );
 
   return (
     <nav className="bg-blue-600 text-white p-4 shadow-lg">
@@ -13,42 +82,8 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6">
-          <li>
-            <Link to="/" className="hover:text-gray-300">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/all-visas" className="hover:text-gray-300">
-              All Visas
-            </Link>
-          </li>
-          <li>
-            <Link to="/add-visa" className="hover:text-gray-300">
-              Add Visa
-            </Link>
-          </li>
-          <li>
-            <Link to="/my-added-visas" className="hover:text-gray-300">
-              My Added Visas
-            </Link>
-          </li>
-          <li>
-            <Link to="/my-visa-applications" className="hover:text-gray-300">
-              My Visa Applications
-            </Link>
-          </li>
-          <li>
-            <Link to="/login" className="hover:text-gray-300">
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link to="/register" className="hover:text-gray-300">
-              Register
-            </Link>
-          </li>
+        <ul className="hidden md:flex space-x-6 justify-center items-center">
+          {navlinks}
         </ul>
 
         {/* Mobile Menu Button */}
@@ -75,44 +110,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <ul className="md:hidden mt-4 space-y-3 bg-blue-700 p-4 rounded-lg">
-          <li>
-            <Link to="/" className="block hover:text-gray-300">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/all-visas" className="block hover:text-gray-300">
-              All Visas
-            </Link>
-          </li>
-          <li>
-            <Link to="/add-visa" className="block hover:text-gray-300">
-              Add Visa (🔒)
-            </Link>
-          </li>
-          <li>
-            <Link to="/my-added-visas" className="block hover:text-gray-300">
-              My Added Visas (🔒)
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/my-visa-applications"
-              className="block hover:text-gray-300"
-            >
-              My Visa Applications (🔒)
-            </Link>
-          </li>
-          <li>
-            <Link to="/login" className="block hover:text-gray-300">
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link to="/register" className="block hover:text-gray-300">
-              Register
-            </Link>
-          </li>
+          {navlinks}
         </ul>
       )}
     </nav>
