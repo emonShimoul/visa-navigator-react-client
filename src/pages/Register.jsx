@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
@@ -7,16 +7,44 @@ const Register = () => {
 
   console.log(myObj);
 
+  const navigate = useNavigate();
+  const [error, setError] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // get form data
+    const form = new FormData(e.target);
+    console.log(form);
+
+    const name = form.get("name");
+    const email = form.get("email");
+    const photo = form.get("photo");
+    const password = form.get("password");
+
+    console.log(name, email, photo, password);
+
+    const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    if (!regex.test(password)) {
+      setError({
+        ...error,
+        passwordError:
+          "Password must have an Uppercase, a Lowercase and at least 6 characters!!",
+      });
+      return;
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-md px-8 py-4 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md my-4">
+      <div className="w-1/2 px-12 py-4 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md my-4">
         {/* Logo / Heading */}
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
           Create Account
         </h2>
 
         {/* Registration Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
           <div>
             <label className="block text-gray-700 dark:text-gray-300">
@@ -25,6 +53,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="Enter your name"
+              name="name"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -37,6 +66,7 @@ const Register = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              name="email"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -49,6 +79,7 @@ const Register = () => {
             <input
               type="url"
               placeholder="Enter photo URL"
+              name="photo"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -61,8 +92,18 @@ const Register = () => {
             <input
               type="password"
               placeholder="Enter your password"
+              name="password"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            <span>An Uppercase, a Lowercase and at least 6 characters.</span>
+            {error.passwordError && (
+              <label
+                htmlFor=""
+                className="label text-sm text-red-500 font-bold mt-4"
+              >
+                {error.passwordError}
+              </label>
+            )}
           </div>
 
           {/* Register Button */}
