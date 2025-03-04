@@ -1,79 +1,131 @@
 import React from "react";
 
 const AddVisa = () => {
-  const handleAddVisa = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Added visaa");
+
+    const form = e.target;
+    const countryImage = form.countryImage.value;
+    const countryName = form.countryName.value;
+    const visaType = form.visaType.value;
+    const processingTime = form.processingTime.value;
+    const description = form.description.value;
+    const ageRestriction = form.ageRestriction.value;
+    const fee = form.fee.value;
+    const validity = form.validity.value;
+    const applicationMethod = form.applicationMethod.value;
+
+    // Handle checkboxes (Only checked ones)
+    const requiredDocuments = Array.from(
+      form.querySelectorAll('input[name="requiredDocuments"]:checked')
+    ).map((checkbox) => checkbox.value);
+
+    const formData = {
+      countryImage,
+      countryName,
+      visaType,
+      processingTime,
+      requiredDocuments,
+      description,
+      ageRestriction,
+      fee,
+      validity,
+      applicationMethod,
+    };
+
+    console.log("Form Data Submitted:", formData);
   };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
       <h2 className="text-2xl font-bold mb-4">Add a New Visa</h2>
-      <form onSubmit={handleAddVisa} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
+          name="countryImage"
           placeholder="Country Image URL"
           className="w-full p-2 border rounded"
+          required
         />
         <input
           type="text"
+          name="countryName"
           placeholder="Country Name"
           className="w-full p-2 border rounded"
+          required
         />
-        <select className="w-full p-2 border rounded">
-          <option>Tourist visa</option>
-          <option>Student visa</option>
-          <option>Official visa</option>
+        <select name="visaType" className="w-full p-2 border rounded">
+          <option value="Tourist visa">Tourist visa</option>
+          <option value="Student visa">Student visa</option>
+          <option value="Official visa">Official visa</option>
         </select>
         <input
           type="text"
+          name="processingTime"
           placeholder="Processing Time"
           className="w-full p-2 border rounded"
+          required
         />
         <div>
           <label className="font-semibold">Required Documents:</label>
           <div>
-            <input type="checkbox" id="passport" />
-            <label htmlFor="passport" className="ml-2">
-              Valid passport
-            </label>
+            <input
+              type="checkbox"
+              name="requiredDocuments"
+              value="Valid passport"
+            />{" "}
+            Valid passport
           </div>
           <div>
-            <input type="checkbox" id="form" />
-            <label htmlFor="form" className="ml-2">
-              Visa application form
-            </label>
+            <input
+              type="checkbox"
+              name="requiredDocuments"
+              value="Visa application form"
+            />{" "}
+            Visa application form
           </div>
           <div>
-            <input type="checkbox" id="photo" />
-            <label htmlFor="photo" className="ml-2">
-              Recent passport-sized photograph
-            </label>
+            <input
+              type="checkbox"
+              name="requiredDocuments"
+              value="Recent passport-sized photograph"
+            />{" "}
+            Recent passport-sized photograph
           </div>
         </div>
         <textarea
+          name="description"
           placeholder="Description"
           className="w-full p-2 border rounded"
+          required
         />
         <input
           type="number"
+          name="ageRestriction"
           placeholder="Age Restriction"
           className="w-full p-2 border rounded"
+          required
         />
         <input
           type="number"
+          name="fee"
           placeholder="Visa Fee"
           className="w-full p-2 border rounded"
+          required
         />
         <input
           type="text"
+          name="validity"
           placeholder="Validity"
           className="w-full p-2 border rounded"
+          required
         />
         <input
           type="text"
+          name="applicationMethod"
           placeholder="Application Method"
           className="w-full p-2 border rounded"
+          required
         />
         <button
           type="submit"
