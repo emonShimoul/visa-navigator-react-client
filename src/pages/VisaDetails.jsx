@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import {
   FaMoneyBillWave,
@@ -11,6 +11,8 @@ import {
 const VisaDetails = () => {
   const visaInfo = useLoaderData();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const {
     _id,
     countryImage,
@@ -24,6 +26,11 @@ const VisaDetails = () => {
     validity,
     applicationMethod,
   } = visaInfo;
+
+  const handleVisaApplication = (e) => {
+    e.preventDefault();
+    console.log("Visa application submitted");
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -48,30 +55,26 @@ const VisaDetails = () => {
         <div className="space-y-4">
           <p className="flex items-center text-gray-700">
             <FaClock className="text-blue-500 mr-2" />{" "}
-            <strong>Processing Time: </strong>{" "}
-            <span className="ms-2"> {processingTime}</span>
+            <strong>Processing Time:</strong> {processingTime}
           </p>
           <p className="flex items-center text-gray-700">
             <FaMoneyBillWave className="text-green-500 mr-2" />{" "}
-            <strong>Fee: </strong> <span className="ms-2">${fee}</span>
+            <strong>Fee:</strong> ${fee}
           </p>
           <p className="flex items-center text-gray-700">
             <FaUserShield className="text-yellow-500 mr-2" />{" "}
-            <strong>Age Restriction: </strong>{" "}
-            <span className="ms-2">{ageRestriction}+</span>
+            <strong>Age Restriction:</strong> {ageRestriction}+
           </p>
           <p className="flex items-center text-gray-700">
             <FaCheckCircle className="text-purple-500 mr-2" />{" "}
-            <strong>Validity: </strong> <span className="ms-2">{validity}</span>
+            <strong>Validity:</strong> {validity}
           </p>
           <p className="flex items-center text-gray-700">
             <FaFileAlt className="text-red-500 mr-2" />{" "}
-            <strong>Application Method: </strong>{" "}
-            <span className="ms-2">{applicationMethod}</span>
+            <strong>Application Method:</strong> {applicationMethod}
           </p>
           <p className="text-gray-700">
-            <strong>Description:</strong>{" "}
-            <span className="ms-2">{description}</span>
+            <strong>Description:</strong> {description}
           </p>
         </div>
 
@@ -89,14 +92,95 @@ const VisaDetails = () => {
           </ul>
         </div>
 
-        {/* Back Button */}
-        <button
-          className="mt-6 bg-gray-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-700 cursor-pointer"
-          onClick={() => navigate(-1)}
-        >
-          ← Back to All Visas
-        </button>
+        {/* Buttons */}
+        <div className="mt-6 flex space-x-4">
+          <button
+            className="bg-gray-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-700 cursor-pointer"
+            onClick={() => navigate(-1)}
+          >
+            ← Back to All Visas
+          </button>
+          <button
+            className="bg-gradient-to-r from-green-600 to-teal-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:from-teal-600 hover:to-green-500 hover:shadow-xl cursor-pointer"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Apply for the Visa 📄
+          </button>
+        </div>
       </div>
+
+      {/* Application Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">
+              Apply for {countryName} Visa
+            </h3>
+            <form onSubmit={handleVisaApplication} className="space-y-4">
+              <div>
+                <label className="block text-gray-700">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
+                  disabled
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700">First Name:</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  className="w-full border rounded p-2"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700">Last Name:</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  className="w-full border rounded p-2"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700">Applied Date:</label>
+                <input
+                  type="date"
+                  name="appliedDate"
+                  className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
+                  disabled
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700">Fee:</label>
+                <input
+                  type="text"
+                  name="fee"
+                  className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
+                  disabled
+                />
+              </div>
+              <div className="flex justify-between mt-4">
+                <button
+                  type="button"
+                  className="text-gray-900 font-semibold underline cursor-pointer"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 cursor-pointer"
+                >
+                  Apply ✅
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
