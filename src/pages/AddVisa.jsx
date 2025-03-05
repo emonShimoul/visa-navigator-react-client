@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddVisa = () => {
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -20,7 +23,7 @@ const AddVisa = () => {
       form.querySelectorAll('input[name="requiredDocuments"]:checked')
     ).map((checkbox) => checkbox.value);
 
-    const formData = {
+    const newVisa = {
       countryImage,
       countryName,
       visaType,
@@ -33,7 +36,28 @@ const AddVisa = () => {
       applicationMethod,
     };
 
-    console.log("Form Data Submitted:", formData);
+    // console.log("Form Data Submitted:", newVisa);
+
+    fetch("http://localhost:5000/visas", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newVisa),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "Visa added successfully!!",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          navigate("/all-visas");
+        }
+      });
   };
 
   return (
@@ -129,7 +153,7 @@ const AddVisa = () => {
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-blue-500 text-white p-2 rounded cursor-pointer"
         >
           Add Visa
         </button>
