@@ -38,7 +38,7 @@ const AllVisa = () => {
               <span className="font-bold text-blue-500">Fee:</span> ${visa.fee}
             </p>
             <button
-              className="mt-4 w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:from-indigo-600 hover:to-blue-500 hover:shadow-xl cursor-pointer"
+              className="mt-4 w-full bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:from-gray-600 hover:to-gray-500 hover:shadow-xl cursor-pointer"
               onClick={() => navigate(`/all-visas/${visa._id}`)}
             >
               See Details →
