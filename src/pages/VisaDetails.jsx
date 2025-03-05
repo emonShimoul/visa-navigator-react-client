@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import {
   FaMoneyBillWave,
@@ -7,8 +7,10 @@ import {
   FaUserShield,
   FaCheckCircle,
 } from "react-icons/fa";
+import { AuthContext } from "../provider/AuthProvider";
 
 const VisaDetails = () => {
+  const { user } = useContext(AuthContext);
   const visaInfo = useLoaderData();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,9 +29,17 @@ const VisaDetails = () => {
     applicationMethod,
   } = visaInfo;
 
+  const appliedDate = new Date().toISOString().split("T")[0]; // Current Date
+
   const handleVisaApplication = (e) => {
     e.preventDefault();
     console.log("Visa application submitted");
+
+    const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+
+    console.log(firstName, lastName, appliedDate, fee);
   };
 
   return (
@@ -122,6 +132,7 @@ const VisaDetails = () => {
                 <input
                   type="email"
                   name="email"
+                  value={user?.email}
                   className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
                   disabled
                 />
@@ -149,6 +160,7 @@ const VisaDetails = () => {
                 <input
                   type="date"
                   name="appliedDate"
+                  value={appliedDate}
                   className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
                   disabled
                 />
@@ -158,6 +170,7 @@ const VisaDetails = () => {
                 <input
                   type="text"
                   name="fee"
+                  value={fee || ""}
                   className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
                   disabled
                 />
