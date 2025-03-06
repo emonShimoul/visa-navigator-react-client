@@ -54,7 +54,19 @@ const VisaDetails = () => {
       applicationMethod,
     };
 
-    console.log(visaApplication);
+    // console.log(visaApplication);
+
+    fetch("http://localhost:5000/visa-application", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(visaApplication),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
