@@ -54,7 +54,7 @@ const VisaDetails = () => {
       applicationMethod,
     };
 
-    // console.log(visaApplication);
+    console.log(visaApplication);
 
     fetch("http://localhost:5000/visa-application", {
       method: "POST",
@@ -66,6 +66,16 @@ const VisaDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "Visa application submitted successfully!!",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          form.reset();
+          setIsModalOpen(false);
+        }
       });
   };
 
