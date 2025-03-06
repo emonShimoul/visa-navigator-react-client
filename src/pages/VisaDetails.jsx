@@ -8,13 +8,14 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const VisaDetails = () => {
   const { user } = useContext(AuthContext);
   const visaInfo = useLoaderData();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const userEmail = user.email;
   const {
     _id,
     countryImage,
@@ -39,7 +40,21 @@ const VisaDetails = () => {
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
 
-    console.log(firstName, lastName, appliedDate, fee);
+    const visaApplication = {
+      firstName,
+      lastName,
+      appliedDate,
+      fee,
+      userEmail,
+      countryName,
+      countryImage,
+      visaType,
+      processingTime,
+      validity,
+      applicationMethod,
+    };
+
+    console.log(visaApplication);
   };
 
   return (
