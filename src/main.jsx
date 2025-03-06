@@ -15,12 +15,17 @@ import AuthProvider from "./provider/AuthProvider";
 import PrivateRoute from "./routes/PrivateRoute";
 import VisaDetails from "./pages/VisaDetails";
 import ErrorPage from "./pages/ErrorPage";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
     children: [
+      {
+        path: "/",
+        element: <HomePage></HomePage>,
+      },
       {
         path: "/all-visas",
         element: <AllVisa></AllVisa>,
