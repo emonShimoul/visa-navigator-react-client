@@ -145,7 +145,7 @@ const VisaDetails = () => {
             className="bg-gray-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-700 cursor-pointer"
             onClick={() => navigate(-1)}
           >
-            ← Back to All Visas
+            ← Back to Visas
           </button>
           <button
             className="bg-gradient-to-r from-green-600 to-teal-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:from-teal-600 hover:to-green-500 hover:shadow-xl cursor-pointer"
