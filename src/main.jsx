@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import AuthProvider from "./provider/AuthProvider";
 import PrivateRoute from "./routes/PrivateRoute";
 import VisaDetails from "./pages/VisaDetails";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     element: <Home></Home>,
     children: [
       {
-        path: "all-visas",
+        path: "/all-visas",
         element: <AllVisa></AllVisa>,
         loader: () => fetch("http://localhost:5000/visas"),
       },
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/all-visas/${params.id}`),
       },
       {
-        path: "add-visa",
+        path: "/add-visa",
         element: (
           <PrivateRoute>
             <AddVisa></AddVisa>
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-added-visas",
+        path: "/my-added-visas",
         element: (
           <PrivateRoute>
             <MyAddedVisas></MyAddedVisas>
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-visa-applications",
+        path: "/my-visa-applications",
         element: (
           <PrivateRoute>
             <MyVisaApplication></MyVisaApplication>
@@ -60,14 +61,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login></Login>,
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register></Register>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage></ErrorPage>,
   },
 ]);
 
