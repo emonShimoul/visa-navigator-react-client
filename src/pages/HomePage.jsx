@@ -1,6 +1,6 @@
 import React from "react";
-import LatestVisas from "./LatestVisas";
 import Banner from "../components/Banner";
+import LatestVisas from "../components/LatestVisas";
 
 const HomePage = () => {
   return (
