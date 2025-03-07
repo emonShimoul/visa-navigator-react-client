@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const MyVisaApplication = () => {
   const { user } = useContext(AuthContext);
@@ -16,7 +17,36 @@ const MyVisaApplication = () => {
   }, []);
 
   const handleCancel = (id) => {
-    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/visa-application/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Cancelled!",
+                text: "Your Visa Application has been cancelled.",
+                icon: "success",
+              });
+
+              const remaining = visaApplications.filter(
+                (application) => application._id !== id
+              );
+              setVisaApplications(remaining);
+            }
+          });
+      }
+    });
   };
 
   return (
