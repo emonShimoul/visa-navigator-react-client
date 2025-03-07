@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AddVisa = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  const userEmail = user?.email;
+
+  console.log(userEmail);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,6 +41,7 @@ const AddVisa = () => {
       fee,
       validity,
       applicationMethod,
+      userEmail,
     };
 
     // console.log("Form Data Submitted:", newVisa);
