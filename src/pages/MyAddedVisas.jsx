@@ -73,11 +73,11 @@ const MyAddedVisas = () => {
             >
               <img
                 src={visa.countryImage}
-                alt={visa.country}
+                alt={visa.countryName}
                 className="w-full h-40 object-cover rounded-md"
               />
               <h3 className="text-xl font-semibold text-gray-900 mt-3">
-                {visa.country}
+                {visa.countryName}
               </h3>
               <p className="text-gray-700 text-sm">
                 <span className="font-medium">Visa Type:</span> {visa.visaType}

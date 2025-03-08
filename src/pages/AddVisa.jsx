@@ -29,6 +29,7 @@ const AddVisa = () => {
     const requiredDocuments = Array.from(
       form.querySelectorAll('input[name="requiredDocuments"]:checked')
     ).map((checkbox) => checkbox.value);
+    console.log(requiredDocuments);
 
     const newVisa = {
       countryImage,

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateVisa = () => {
   const visa = useLoaderData();
+  const navigate = useNavigate();
 
   const {
     _id,
@@ -28,7 +30,7 @@ const UpdateVisa = () => {
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    console.log(event.target.checked);
+    // console.log(event.target.checked);
 
     if (checked) {
       setSelectedDocuments([...selectedDocuments, value]); // Add to array
@@ -39,18 +41,52 @@ const UpdateVisa = () => {
 
   const handleUpdateVisa = (e) => {
     e.preventDefault();
-    console.log("Updated Visa Data:", {
-      countryImage: e.target.countryImage.value,
-      countryName: e.target.countryName.value,
-      visaType: e.target.visaType.value,
-      processingTime: e.target.processingTime.value,
-      requiredDocuments: selectedDocuments,
-      description: e.target.description.value,
-      ageRestriction: e.target.ageRestriction.value,
-      fee: e.target.fee.value,
-      validity: e.target.validity.value,
-      applicationMethod: e.target.applicationMethod.value,
-    });
+    const form = e.target;
+    const countryImage = form.countryImage.value;
+    const countryName = form.countryName.value;
+    const visaType = form.visaType.value;
+    const processingTime = form.processingTime.value;
+    const requiredDocuments = selectedDocuments;
+    const description = form.description.value;
+    const ageRestriction = form.ageRestriction.value;
+    const fee = form.fee.value;
+    const validity = form.validity.value;
+    const applicationMethod = form.applicationMethod.value;
+
+    const updatedVisa = {
+      countryImage,
+      countryName,
+      visaType,
+      processingTime,
+      requiredDocuments,
+      description,
+      ageRestriction,
+      fee,
+      validity,
+      applicationMethod,
+    };
+
+    console.log(updatedVisa.requiredDocuments);
+
+    fetch(`http://localhost:5000/visas/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedVisa),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "Visa info updated successfully!!",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
+        navigate("/my-added-visas");
+      });
   };
 
   return (
