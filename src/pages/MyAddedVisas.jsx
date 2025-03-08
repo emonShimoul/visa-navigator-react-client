@@ -17,7 +17,7 @@ const MyAddedVisas = () => {
         setMyAddedVisas(data);
       });
   }, []);
-  console.log(myAddedVisas);
+  // console.log(myAddedVisas);
 
   const handleDelete = (id) => {
     console.log(id);
