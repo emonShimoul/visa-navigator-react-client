@@ -42,7 +42,7 @@ const AddVisa = () => {
       userEmail,
     };
 
-    fetch("http://localhost:5000/visas", {
+    fetch("https://visa-navigator-server-xi-lovat.vercel.app/visas", {
       method: "POST",
       headers: {
         "content-type": "application/json",

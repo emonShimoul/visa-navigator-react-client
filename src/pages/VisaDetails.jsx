@@ -53,13 +53,16 @@ const VisaDetails = () => {
       applicationMethod,
     };
 
-    fetch("http://localhost:5000/visa-application", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(visaApplication),
-    })
+    fetch(
+      "https://visa-navigator-server-xi-lovat.vercel.app/visa-application",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(visaApplication),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

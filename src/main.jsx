@@ -30,7 +30,8 @@ const router = createBrowserRouter([
       {
         path: "/all-visas",
         element: <AllVisa></AllVisa>,
-        loader: () => fetch("http://localhost:5000/visas"),
+        loader: () =>
+          fetch("https://visa-navigator-server-xi-lovat.vercel.app/visas"),
       },
       {
         path: "all-visas/:id",
@@ -40,7 +41,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-visas/${params.id}`),
+          fetch(
+            `https://visa-navigator-server-xi-lovat.vercel.app/all-visas/${params.id}`
+          ),
       },
       {
         path: "/add-visa",
@@ -58,7 +61,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-visas/${params.id}`),
+          fetch(
+            `https://visa-navigator-server-xi-lovat.vercel.app/all-visas/${params.id}`
+          ),
       },
       {
         path: "/my-added-visas",

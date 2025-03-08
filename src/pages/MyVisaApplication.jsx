@@ -7,7 +7,9 @@ const MyVisaApplication = () => {
   const [visaApplications, setVisaApplications] = useState([]);
 
   useState(() => {
-    fetch(`http://localhost:5000/visa-application/${user?.email}`)
+    fetch(
+      `https://visa-navigator-server-xi-lovat.vercel.app/visa-application/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setVisaApplications(data);
@@ -26,9 +28,12 @@ const MyVisaApplication = () => {
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/visa-application/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://visa-navigator-server-xi-lovat.vercel.app/visa-application/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

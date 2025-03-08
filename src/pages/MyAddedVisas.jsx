@@ -10,7 +10,9 @@ const MyAddedVisas = () => {
   const navigate = useNavigate();
 
   useState(() => {
-    fetch(`http://localhost:5000/visas/${user?.email}`)
+    fetch(
+      `https://visa-navigator-server-xi-lovat.vercel.app/visas/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyAddedVisas(data);
@@ -28,7 +30,7 @@ const MyAddedVisas = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/visas/${id}`, {
+        fetch(`https://visa-navigator-server-xi-lovat.vercel.app/visas/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -49,7 +49,7 @@ const Register = () => {
           });
 
         // save new user info to db
-        fetch("http://localhost:5000/users", {
+        fetch("https://visa-navigator-server-xi-lovat.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

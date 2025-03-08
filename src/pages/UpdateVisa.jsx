@@ -65,7 +65,7 @@ const UpdateVisa = () => {
       applicationMethod,
     };
 
-    fetch(`http://localhost:5000/visas/${_id}`, {
+    fetch(`https://visa-navigator-server-xi-lovat.vercel.app/visas/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

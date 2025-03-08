@@ -7,7 +7,7 @@ const LatestVisas = () => {
 
   // Fetch the latest 6 visas (Replace with your API call)
   useEffect(() => {
-    fetch("http://localhost:5000/visas") // Replace with actual API endpoint
+    fetch("https://visa-navigator-server-xi-lovat.vercel.app/visas") // Replace with actual API endpoint
       .then((res) => res.json())
       .then((data) => setLatestVisas(data.slice(0, 6))) // Get only the latest 6
       .catch((error) => console.error("Error fetching visas:", error));
