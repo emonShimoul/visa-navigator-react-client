@@ -18,13 +18,14 @@ const MyVisaApplication = () => {
 
   const handleCancel = (id) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: "Are you sure to cancel?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Nooo",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`http://localhost:5000/visa-application/${id}`, {
