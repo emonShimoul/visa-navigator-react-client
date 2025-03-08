@@ -30,7 +30,6 @@ const UpdateVisa = () => {
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    // console.log(event.target.checked);
 
     if (checked) {
       setSelectedDocuments([...selectedDocuments, value]); // Add to array
@@ -65,8 +64,6 @@ const UpdateVisa = () => {
       validity,
       applicationMethod,
     };
-
-    console.log(updatedVisa.requiredDocuments);
 
     fetch(`http://localhost:5000/visas/${_id}`, {
       method: "PUT",

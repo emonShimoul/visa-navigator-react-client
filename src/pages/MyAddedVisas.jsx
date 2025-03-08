@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const MyAddedVisas = () => {
   const { user } = useContext(AuthContext);
   const [myAddedVisas, setMyAddedVisas] = useState([]);
-  // console.log(visaApplications);
 
   const navigate = useNavigate();
 
@@ -17,11 +16,8 @@ const MyAddedVisas = () => {
         setMyAddedVisas(data);
       });
   }, []);
-  // console.log(myAddedVisas);
 
   const handleDelete = (id) => {
-    console.log(id);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -56,12 +52,12 @@ const MyAddedVisas = () => {
 
   return (
     <div className="container mx-auto px-6 py-12">
-      <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+      <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-8">
         My Added Visas
       </h2>
 
       {myAddedVisas.length === 0 ? (
-        <p className="text-center text-gray-600 text-lg">
+        <p className="text-center text-red-600 font-bold text-2xl my-20">
           You haven't added any visas yet.
         </p>
       ) : (

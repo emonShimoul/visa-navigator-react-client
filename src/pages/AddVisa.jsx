@@ -9,8 +9,6 @@ const AddVisa = () => {
 
   const userEmail = user?.email;
 
-  console.log(userEmail);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -29,7 +27,6 @@ const AddVisa = () => {
     const requiredDocuments = Array.from(
       form.querySelectorAll('input[name="requiredDocuments"]:checked')
     ).map((checkbox) => checkbox.value);
-    console.log(requiredDocuments);
 
     const newVisa = {
       countryImage,
@@ -45,8 +42,6 @@ const AddVisa = () => {
       userEmail,
     };
 
-    // console.log("Form Data Submitted:", newVisa);
-
     fetch("http://localhost:5000/visas", {
       method: "POST",
       headers: {
@@ -56,7 +51,6 @@ const AddVisa = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success",

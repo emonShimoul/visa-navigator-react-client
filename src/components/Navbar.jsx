@@ -5,7 +5,6 @@ import { AuthContext } from "../provider/AuthProvider";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-  // console.log(user);
 
   const navlinks = (
     <>

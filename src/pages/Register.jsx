@@ -15,14 +15,11 @@ const Register = () => {
 
     // get form data
     const form = new FormData(e.target);
-    // console.log(form);
 
     const name = form.get("name");
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
-
-    // console.log(name, email, photo, password);
 
     const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
     if (!regex.test(password)) {
@@ -40,7 +37,6 @@ const Register = () => {
         const user = result.user;
         const dbUserInfo = { name, email, photo, createdAt };
         setUser(user);
-        // console.log(user);
 
         // update user profile in the firebase
         updatedUserProfile({ displayName: name, photoURL: photo })

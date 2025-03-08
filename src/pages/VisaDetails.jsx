@@ -34,7 +34,6 @@ const VisaDetails = () => {
 
   const handleVisaApplication = (e) => {
     e.preventDefault();
-    console.log("Visa application submitted");
 
     const form = e.target;
     const firstName = form.firstName.value;
@@ -54,8 +53,6 @@ const VisaDetails = () => {
       applicationMethod,
     };
 
-    console.log(visaApplication);
-
     fetch("http://localhost:5000/visa-application", {
       method: "POST",
       headers: {
@@ -65,7 +62,6 @@ const VisaDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success",

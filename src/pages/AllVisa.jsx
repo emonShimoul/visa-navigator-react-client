@@ -5,7 +5,7 @@ const AllVisa = () => {
   const loadVisas = useLoaderData();
 
   const [visas, setVisas] = useState(loadVisas);
-  console.log(visas);
+
   const navigate = useNavigate();
 
   return (

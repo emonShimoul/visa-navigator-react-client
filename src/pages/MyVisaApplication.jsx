@@ -6,8 +6,6 @@ const MyVisaApplication = () => {
   const { user } = useContext(AuthContext);
   const [visaApplications, setVisaApplications] = useState([]);
 
-  // console.log(visaApplications);
-
   useState(() => {
     fetch(`http://localhost:5000/visa-application/${user?.email}`)
       .then((res) => res.json())
