@@ -14,7 +14,7 @@ const LatestVisas = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto px-6 pt-12">
       <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
         Latest Visas
       </h2>
