@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createNewUser, updatedUserProfile, setUser } =
@@ -35,16 +36,40 @@ const Register = () => {
 
     createNewUser(email, password)
       .then((result) => {
+        const createdAt = result.user?.metadata?.creationTime;
         const user = result.user;
+        const dbUserInfo = { name, email, photo, createdAt };
         setUser(user);
-        console.log(user);
+        // console.log(user);
+
+        // update user profile in the firebase
         updatedUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
             navigate("/");
           })
-          .cathc((err) => {
+          .catch((err) => {
             setError({ ...error, register: err.message });
+          });
+
+        // save new user info to db
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(dbUserInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire({
+                title: "Success!",
+                text: "User created successfully!!",
+                icon: "success",
+                confirmButtonText: "Cool",
+              });
+            }
           });
       })
       .catch((err) => {
