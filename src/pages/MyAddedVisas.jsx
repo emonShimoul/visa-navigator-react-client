@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const MyAddedVisas = () => {
   const { user } = useContext(AuthContext);
   const [myAddedVisas, setMyAddedVisas] = useState([]);
   // console.log(visaApplications);
+
+  const navigate = useNavigate();
 
   useState(() => {
     fetch(`http://localhost:5000/visas/${user?.email}`)
@@ -97,7 +100,10 @@ const MyAddedVisas = () => {
               {/* Action Buttons */}
               <div className="mt-4 flex justify-between">
                 {/* onClick={() => navigate(`/update-visa/${visa._id}`)} */}
-                <button className="px-4 py-2 bg-gray-600 text-white text-sm font-semibold rounded-md hover:bg-gray-700 transition cursor-pointer">
+                <button
+                  onClick={() => navigate(`/update-visa/${visa._id}`)}
+                  className="px-4 py-2 bg-gray-600 text-white text-sm font-semibold rounded-md hover:bg-gray-700 transition cursor-pointer"
+                >
                   Update
                 </button>
                 <button
