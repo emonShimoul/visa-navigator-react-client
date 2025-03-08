@@ -1,12 +1,22 @@
-# React + Vite
+# Visa Navigator Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site URL:** [Insert Live Site Link Here]
 
-Currently, two official plugins are available:
+## 🌍 About Visa Navigator Portal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Visa Navigator Portal is a user-friendly platform designed to simplify the process of checking visa requirements, applying for visas online, and tracking applications. Our goal is to make visa applications seamless and hassle-free for travelers worldwide.
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Search & Explore Visas:** Easily find visa requirements for different countries.
+- **Apply Online:** Submit visa applications directly through the platform.
+- **Track Application Status:** Keep track of your visa progress in real-time.
+- **Manage Your Applications:** View, update, and cancel your visa applications.
+- **User-Friendly Interface:** Modern and responsive design for a smooth user experience.
+
+## 🛠️ Technologies Used
+
+- **Frontend:** React, React Router, Tailwind CSS
+- **Backend:** Node.js, Express.js, MongoDB
+- **Authentication:** Firebase Authentication
+- **UI Components:** React Icons, React Toastify
